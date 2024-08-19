@@ -3,13 +3,16 @@ package com.micro.services.controller;
 import com.micro.services.model.Employee;
 import com.micro.services.services.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/v1/emp_info")
 public class EmployeeController {
+    @Qualifier("employeeServiceImpl")
     @Autowired
     EmployeeServiceImpl employeeServiceImpl;
 
