@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeV2ServiceImpl implements CrudService<Employee>{
@@ -27,12 +28,16 @@ public class EmployeeV2ServiceImpl implements CrudService<Employee>{
 
     @Override
     public List<Employee> getAll() {
-        return null;
+       List<EmployeeEntity> employeeEntities = employeeRepository.findAll();
+        return employeeEntities.stream().map((employee)->{
+           return new Employee(employee.getID(), employee.getName(), employee.getAddress());
+       }).toList();
     }
 
     @Override
     public Employee getByID(String id) {
-        return null;
+        EmployeeEntity employeeEntity= employeeRepository.getReferenceById(id);
+        return new Employee(employeeEntity.getID(), employeeEntity.getName(), employeeEntity.getAddress());
     }
 
     @Override

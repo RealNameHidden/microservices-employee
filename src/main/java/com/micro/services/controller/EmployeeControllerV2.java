@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController("/v2")
+@RestController
+@RequestMapping("/v2/emp_info")
 public class EmployeeControllerV2 {
+    @Qualifier("employeeV2ServiceImpl")
     @Autowired
     EmployeeV2ServiceImpl employeeServiceImpl;
 
-    private  ArrayList<Employee> EmployeeDirectory;
-
     @GetMapping("/employee")
-    public Employee saveEmployee(@RequestParam String id){
+    public Employee getEmployee(@RequestParam String id){
         return employeeServiceImpl.getByID(id);
     }
 
